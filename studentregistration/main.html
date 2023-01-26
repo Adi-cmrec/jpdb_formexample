@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html lang="en">
+
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="http://login2explore.com/jpdb/resources/js/0.0.3/jpdb-commons.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Student Form </h2>
+        <form id="studentForm" method="post">
+            <div class="form-group">
+                <span><label for="stdId">Student ID:</label> <label id="stdIdMsg">
+                    </label></span>
+                <input type="text" class="form-control" name="stdId" id="stdId" placeholder="Enter Student ID"
+                    required>
+            </div>
+            <div class="form-group">
+                <label for="empName">Student Name:</label>
+                <input type="text" class="form-control" id="stdName" placeholder="Enter Student Name" name="stdName">
+            </div>
+
+            <div class="form-group">
+                <label>Class :</label>
+                <input type="number" class="form-control" id="stdclass" placeholder="enter class ">
+            </div>
+
+            <div class="form-group">
+                <label>Birthdate :</label>
+                <input type="date" class="form-control" id="stddate" placeholder="enter birth date ">
+            </div>
+
+            <div class="form-group">
+                <label>Address:</label>
+                <input type="text" class="form-control" id="address" placeholder="enter address ">
+            </div>
+            <div class="form-group">
+                <label> Enrollment Date  :</label>
+                <input type="date" class="form-control" id="enrollDate" placeholder="enter Enrollment date ">
+            </div>
+            <input type="button" class="btn btn-primary" id="Save" value="Save" onclick="registerCandidate();">
+        </form>
+    </div>
+
+    </body>
+    <script>
+        function createPUTRequest(connToken, jsonObj, dbName, relName) {
+            var putRequest = "{\n"
+                    + "\"token\" : \""
+                    + connToken
+                    + "\","
+                    + "\"dbName\": \""
+                    + dbName
+                    + "\",\n" + "\"cmd\" : \"PUT\",\n"
+                    + "\"rel\" : \""
+                    + relName + "\","
+                    + "\"jsonStr\": \n"
+                    + jsonObj
+                    + "\n"
+                    + "}";
+            return putRequest;
+        }
+        function executeCommand(reqString, dbBaseUrl, apiEndPointUrl) {
+            var url = dbBaseUrl + apiEndPointUrl;
+            var jsonObj;
+            $.post(url, reqString, function (result) {
+                jsonObj = JSON.parse(result);
+            }).fail(function (result) {
+                var dataJsonObj = result.responseText;
+                jsonObj = JSON.parse(dataJsonObj);
+            });
+            return jsonObj;
+        }
+
+        function validateAndGetFormData() {
+            var stdId= document.getElementById("stdId").value;
+            var stdname = document.getElementById("stdname").value;
+            var stddate = document.getElementById("stddate").value;     
+            var address= document.getElementById("address").value;
+            var enrollDate = document.getElementById("enrollDate").value;
+            //var mobileno = document.getElementById("mobileno").value;
+            
+            var jsonStrObj = {
+                StudentId : stdId,
+                StudentName: name,
+                DOB: stddate,
+                address :address,
+                enrollDate: enrollDate,
+            };
+            return JSON.stringify(jsonStrObj);
+        }
+        
+
+        function registerCandidate() {
+
+            var jsonStr = validateAndGetFormData();
+            if (jsonStr === "") {
+                return;
+            }
+            var putReqStr = createPUTRequest("90932317|-31949271327810288|90954188",jsonStr, "std", "std_Data");
+            alert(putReqStr);
+            jQuery.ajaxSetup({async: false});
+            var resultObj = executeCommand(putReqStr,
+                    "http://api.login2explore.com:5577", "/api/iml");
+            jQuery.ajaxSetup({async: true});
+            alert( "VALUES INSERTED "+ JSON.stringify(resultObj));
+            document.getElementById("studentForm").reset();
+}
+
+        
+    </script>

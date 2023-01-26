@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html lang="en">
+
+<head>
+    <title>Employee Form Example</title>
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+    <div class="container">
+        <h2>Employee form jpdb api </h2>
+        <form id="empForm" method="get">
+            <div class="form-group">
+                <label>Employee ID:</label> 
+                <input type="text" class="form-control"  id="empId" placeholder="Enter Employee ID" onchange="getEmp()">
+            </div>
+            <div class="form-group">
+                <label for="empName">Employee Name:</label>
+                <input type="text" class="form-control" id="empName" placeholder="Enter Employee Name">
+            </div>
+            <div class="form-group">
+                <label for="empbs">Basic Salary </label>
+                <input type="number" class="form-control" id="empbs" placeholder="Enter Basic salary">
+            </div>
+            <div class="form-group">
+                <label for="emphra">HRA:</label>
+                <input type="number" class="form-control" id="emphra" placeholder="Enter HRA">
+            </div>
+            <div class="form-group">
+                <label for="empda">DA:</label>
+                <input type="number" class="form-control" id="empda" placeholder="Enter DA:">
+            </div>
+            <div class="form-group">
+                <label for="deduct"> Deduction :</label>
+                <input type="number" class="form-control" id="deduct" placeholder="Enter deduction">
+            </div>
+
+            <button type="button" class="btn btn-lg btn-primary" id="save" value="save" onclick="saveData()" >save</button>
+            <button type="button" class="btn btn-lg btn-primary" id="change" value="change" onclick="changeData()" disabled>change </button>
+            <button type="button" class="btn btn-lg btn-primary" id="reset" value="reset" onclick="resetForm()" disabled>reset </button>
+        </form>
+    </div>
+
+    <script type="text/javascript" src="https://login2explore.com/jpdb/resources/js/0.0.3/jpdb-commons.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    
+    <script>
+  /*      //      1.Validate form data
+        //     2. create jpdb request string -- token , dbname , relname 
+        //     3. execute this rwquerst--
+        //    4reset the form data -
+
+        function validateAndGetFormData() {
+            var empIdVar = $("#empId").val();
+            if (empIdVar === "") {
+                alert("Employee ID Required Value");
+                $("#empId").focus();
+                return "";
+            }
+            var empNameVar = $("#empName").val();
+            if (empNameVar === "") {
+                alert("Employee Name is Required Value");
+                $("#empName").focus();
+                return "";
+            }
+            var empEmailVar = $("#empEmail").val();
+            if (empEmailVar === "") {
+                alert("Employee Email is Required Value");
+                $("#empEmail").focus();
+                return "";
+            }
+            var jsonStrObj = {
+                empId: empIdVar,
+                empName: empNameVar,
+                empEmail: empEmailVar,
+            };
+            return JSON.stringify(jsonStrObj);
+        }
+
+        function createPUTRequest(connToken, jsonObj, dbName, relName) {
+            var putRequest = "{\n"
+                + "\"token\" : \""
+                + connToken
+                + "\","
+                + "\"dbName\": \""
+                + dbName
+                + "\",\n" + "\"cmd\" : \"PUT\",\n"
+                + "\"rel\" : \""
+                + relName + "\","
+                + "\"jsonStr\": \n"
+                + jsonObj
+                + "\n"
+                + "}";
+            return putRequest;
+        }
+
+        function executeCommand(reqString, dbBaseUrl, apiEndPointUrl) {
+            var url = dbBaseUrl + apiEndPointUrl;
+            var jsonObj;
+            $.post(url, reqString, function (result) {
+                jsonObj = JSON.parse(result);
+            }).fail(function (result) {
+                var dataJsonObj = result.responseText;
+                jsonObj = JSON.parse(dataJsonObj);
+            });
+            return jsonObj;
+        }
+        function resetForm() {
+            $("#empId").val("")
+            $("#empName").val("");
+            $("#empEmail").val("");
+            $("#empId").focus();
+        }
+        
+
+
+
+        function saveEmployee() {
+            var jsonStr = validateAndGetFormData();
+            if (jsonStr === "") {
+                return;
+            }
+            var putReqStr = createPUTRequest("90932317|-31949271327810288|90954188",jsonStr, "SAMPLE", "EMP-REL");
+            alert(putReqStr);
+            jQuery.ajaxSetup({ async: false });
+            var resultObj = executeCommand(putReqStr,"http://api.login2explore.com:5577", "/api/iml");
+            alert(JSON.stringify(resultObj));
+            jQuery.ajaxSetup({ async: true });
+            resetForm();
+        }
+*/
+
+
+
+
+</script>
+</body>
+
+</html>
